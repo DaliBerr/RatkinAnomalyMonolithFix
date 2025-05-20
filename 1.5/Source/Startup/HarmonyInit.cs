@@ -13,13 +13,13 @@ namespace RatkinAnomalyMonolithFix.Startup
         {
             if (!ModsConfig.IsActive("fxz.ratkinanomaly.update"))
             {
-                Log.Warning("[RatkinAnomalyMonolithFix] RatkinAnomaly not found,patch disabled");
+                // Log.Warning("[RatkinAnomalyMonolithFix] RatkinAnomaly not found,patch disabled");
                 return;
             }
-            if (Data.ifRatkinEnd == false)
-            {
-                Log.Warning("[RatkinAnomalyMonolithFix] RatkinAnomaly not finished");
-            }
+            // if (Data.ifRatkinEnd == false)
+            // {
+            //     Log.Warning("[RatkinAnomalyMonolithFix] RatkinAnomaly not finished");
+            // }
             var harmony = new Harmony("com.RatkinAnomalyMonolithFix");
             harmony.PatchAll();
             // Log.Message("[RatkinAnomalyMonolithFix] Harmony patches applied");

@@ -32,7 +32,7 @@
               Text="Copying Defs to $(ModTargetPath)\$(ModVersion)" />
 
     <Copy SourceFiles="@(Langs)"
-          DestinationFiles="@(Langs->'$(ModTargetPath)\$(ModVersion)\Defs\%(RecursiveDir)%(Filename)%(Extension)')" 
+          DestinationFiles="@(Langs->'$(ModTargetPath)\$(ModVersion)\Languages\%(RecursiveDir)%(Filename)%(Extension)')" 
           SkipUnchangedFiles="true" /> 
     <Message  Importance="high" 
               Text="Copying Langs to $(ModTargetPath)\$(ModVersion)" />
