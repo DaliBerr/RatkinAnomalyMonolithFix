@@ -1,0 +1,6 @@
+<GameComponentDefs>
+  <li>
+    <defName>ComponentDef</defName>
+    <class>MyGameComponent</class>
+  </li>
+</GameComponentDefs>

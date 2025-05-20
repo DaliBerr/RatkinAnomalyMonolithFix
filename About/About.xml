@@ -1,0 +1,29 @@
+<ModMetaData>
+  <name>RatkinAnomalyMonolithFix</name>
+  <author>Aquin</author>
+  <description>
+    在安装了鼠族异象的情况下，这个mod拦截了原版异象断开虚空结局后破坏巨石的函数，让你可以在不让小人链接虚空也能够体验鼠族异象的结局，但是在完成紫罗兰之夜之后巨石仍然会被摧毁。
+    When loaded with Ratkin Anomaly, this mod intercepts the original function that destroys the monolith after the Void Ending, allowing you to experience the Ratkin Anomaly ending without linking to the Void. However, the monolith will still be destroyed after the ending battle of Ratkin Anomaly.
+  </description>
+  <packageId>com.Aquin.RatkinAnomalyMonolithFix</packageId>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageID>fxz.ratkinanomaly.update</packageID>
+      <displayName>Ratkin Anomaly</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>fxz.ratkinanomaly.update</li>
+  </loadAfter>
+  <supportedVersions>
+    <li>1.5</li>
+  </supportedVersions>
+</ModMetaData>

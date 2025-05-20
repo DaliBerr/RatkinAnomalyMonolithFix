@@ -1,0 +1,1 @@
+This is a RimWorld mod that patchs Guest LoveChance.
