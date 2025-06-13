@@ -1,0 +1,10 @@
+C:\Code\C#\NoVisitorRomance\1.5\Assemblies\net472\NoVisitorRomance.dll
+C:\Code\C#\NoVisitorRomance\1.5\Assemblies\net472\NoVisitorRomance.pdb
+C:\Code\C#\NoVisitorRomance\1.5\Source\obj\Debug\net472\NoVisitorRomance.csproj.AssemblyReference.cache
+C:\Code\C#\NoVisitorRomance\1.5\Source\obj\Debug\net472\NoVisitorRomance.GeneratedMSBuildEditorConfig.editorconfig
+C:\Code\C#\NoVisitorRomance\1.5\Source\obj\Debug\net472\NoVisitorRomance.AssemblyInfoInputs.cache
+C:\Code\C#\NoVisitorRomance\1.5\Source\obj\Debug\net472\NoVisitorRomance.AssemblyInfo.cs
+C:\Code\C#\NoVisitorRomance\1.5\Source\obj\Debug\net472\NoVisitorRomance.csproj.CoreCompileInputs.cache
+C:\Code\C#\NoVisitorRomance\1.5\Source\obj\Debug\net472\NoVisito.2AFE2ECA.Up2Date
+C:\Code\C#\NoVisitorRomance\1.5\Source\obj\Debug\net472\NoVisitorRomance.dll
+C:\Code\C#\NoVisitorRomance\1.5\Source\obj\Debug\net472\NoVisitorRomance.pdb

@@ -22,8 +22,10 @@
   <loadAfter>
     <li>brrainz.harmony</li>
     <li>fxz.ratkinanomaly.update</li>
+    
   </loadAfter>
   <supportedVersions>
     <li>1.5</li>
+    <li>1.6</li>
   </supportedVersions>
 </ModMetaData>
