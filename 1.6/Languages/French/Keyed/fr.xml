@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+    <DisruptTheLinkFailedByRatkinAnomalyText>
+        Une force mystérieuse a stabilisé votre lien avec le Vide, un peu comme si quelque chose n'était pas encore terminé ...
+    </DisruptTheLinkFailedByRatkinAnomalyText>
+    <DisruptedLinkTextSuccessText>
+        La force étrange qui maintenait liés le Monolithe et le Vide s'est estompée. Le Monolithe ne peut plus supporter la pression et s'effondre.
+    </DisruptedLinkTextSuccessText>
+</LanguageData>

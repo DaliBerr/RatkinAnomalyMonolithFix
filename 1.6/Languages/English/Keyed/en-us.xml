@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
     <DisruptTheLinkFailedByRatkinAnomalyText>
-        A mysterious force forcibly stabilized your link with the Dark, as if something was still unresolved...
+        A mysterious force forcibly stabilized your link with the Void, as if something was still unresolved...
     </DisruptTheLinkFailedByRatkinAnomalyText>
     <DisruptedLinkTextSuccessText>
-        The anomalous force that forcibly maintained the monolith and the Dark has dissipated, and the monolith can no longer withstand the pressure and collapses.
+        The anomalous force that forcibly maintained the monolith and the Void has dissipated, and the monolith can no longer withstand the pressure and collapses.
     </DisruptedLinkTextSuccessText>
 </LanguageData>
