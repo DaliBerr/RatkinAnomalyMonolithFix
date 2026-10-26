@@ -11,7 +11,7 @@ namespace RatkinAnomalyMonolithFix.Startup
     {
         static HarmonyInit()
         {
-            if (!ModsConfig.IsActive("fxz.ratkinanomaly.update"))
+            if (!ModsConfig.AnomalyActive || !ModsConfig.IsActive("fxz.ratkinanomaly.update"))
             {
                 // Log.Warning("[RatkinAnomalyMonolithFix] RatkinAnomaly not found,patch disabled");
                 return;

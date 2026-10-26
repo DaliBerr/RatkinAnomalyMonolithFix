@@ -1,85 +1,69 @@
-using Verse;
+using System;
+using System.Reflection;
 using HarmonyLib;
 using RimWorld;
-using RatkinAnomaly;
-using System.Linq;
 using RimWorld.Utility;
-using System.Drawing.Text;
-using System;
+using Verse;
 using RatkinAnomalyMonolithFix.Core;
+
 namespace RatkinAnomalyMonolithFix.HarmonyPatches
 {
-
     public static class Patches
     {
-        // public static bool ifRatkinEnd = false;
-        // public static bool ifDisruptTheLink = false;
-        // public static Pawn HeroPawn = null;
-        [HarmonyPatch(typeof(VoidAwakeningUtility), "DisruptTheLink")]
+        [HarmonyPatch(typeof(VoidAwakeningUtility), nameof(VoidAwakeningUtility.DisruptTheLink))]
         public static class Prefix_DisruptTheLink
         {
             [HarmonyPrefix]
             public static bool DisruptTheLink_Prefix(Pawn pawn)
             {
+                // After the Ratkin ending, the original game's ending is valid.
+                // Missing context must not start a partially completed ending.
+                if (Data.ifRatkinEnd || pawn == null || Find.Anomaly?.monolith == null
+                    || Find.Anomaly.monolith.Destroyed) return true;
+
+                CoreUtilities.CaptureFunction.CaptureCloseMetalHellFunc();
+                CoreUtilities.CaptureFunction.FuncCloseMetalHell(pawn);
+                Data.HeroPawn = pawn;
                 Data.ifDisruptTheLink = true;
-                if (!Data.ifRatkinEnd)
-                {
-                    Data.HeroPawn = pawn;
-                    CoreUtilities.CaptureFunction.CaptureCloseMetalHellFunc();
-                    CoreUtilities.CaptureFunction.FuncCloseMetalHell(pawn);
-                    Find.Anomaly.monolith.quest.End(QuestEndOutcome.Success, sendLetter: true, playSound: false);
-                    Find.Anomaly.SetLevel(MonolithLevelDefOf.Embraced);
-                    CoreUtilities.ShowPopup("DisruptTheLinkFailedByRatkinAnomalyText".Translate(), () =>
-                    {
-                        Log.Message("[RatkinAnomalyMonolithFix] DisruptTheLink Failed By RatkinAnomaly");
-                        // Log.Warning("[RatkinAnomalyMonolithFix] Flags States: " + "ifRatkinEnd" + Data.ifRatkinEnd + "ifDisruptTheLink" + Data.ifDisruptTheLink + "HeroPawn" + Data.HeroPawn.Name);
-                    });
-                    GameVictoryUtility.ShowCredits("DisruptTheLinkCredits".Translate(pawn.Named("PAWN")), null);
-                    return false;
-                }
-                else
-                {
-                    // Find.Anomaly.monolith.quest.End(QuestEndOutcome.Success, sendLetter: true, playSound: false);
-                    Find.Anomaly.SetLevel(MonolithLevelDefOf.Disrupted);
-                    pawn.needs?.mood?.thoughts?.memories?.TryGainMemory(ThoughtDefOf.ClosedTheVoid);
-                    TaleRecorder.RecordTale(TaleDefOf.ClosedTheVoid, pawn);
-                    foreach (Pawn item in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_OfPlayerFaction)
-                    {
-                        if (item.Inhumanized())
-                        {
-                            item.Rehumanize();
-                        }
-
-                        item.needs?.mood?.thoughts?.memories?.TryGainMemory(ThoughtDefOf.VoidClosed);
-                        item.needs?.mood?.thoughts?.memories?.TryGainMemory(ThoughtDefOf.ClosedTheVoidOpinion, pawn);
-                    }
-
-                    Find.Anomaly.monolith.Collapse();
-                    // GameVictoryUtility.ShowCredits("DisruptTheLinkCredits".Translate(pawn.Named("PAWN")), null);
-                    Find.Anomaly.metalHellReturnLetterText = "DisruptedLinkText".Translate(pawn.Named("PAWN"));
-                    CoreUtilities.ShowPopup("DisruptedLinkTextSuccessText".Translate(), () =>
-                    {
-                        Log.Message("[RatkinAnomalyMonolithFix] DisruptedLinkText Success");
-                        // Log.Warning("[RatkinAnomalyMonolithFix] Flags States: " + "ifRatkinEnd" + Data.ifRatkinEnd + "ifDisruptTheLink" + Data.ifDisruptTheLink + "HeroPawn" + Data.HeroPawn.Name);
-                    });
-                }
-
+                Find.Anomaly.monolith.quest?.End(QuestEndOutcome.Success, sendLetter: true, playSound: false);
+                Find.Anomaly.SetLevel(MonolithLevelDefOf.Embraced);
+                CoreUtilities.ShowPopup("DisruptTheLinkFailedByRatkinAnomalyText".Translate());
+                GameVictoryUtility.ShowCredits("DisruptTheLinkCredits".Translate(pawn.Named("PAWN")), null);
                 return false;
             }
         }
 
-        [HarmonyPatch(typeof(RatkinAnomaly.RAComponent), "EndPlay")]
+        [HarmonyPatch]
         public static class Postfix_EndPlay
         {
+            [HarmonyTargetMethod]
+            public static MethodBase TargetMethod()
+            {
+                // Locate the installed Ratkin version instead of binding this
+                // assembly to a different version's game/engine references.
+                return AccessTools.Method(AccessTools.TypeByName("RatkinAnomaly.RAComponent"), "EndPlay", Type.EmptyTypes);
+            }
+
+            [HarmonyPrefix]
+            public static void EndPlay_Prefix(object __instance, out Pawn __state)
+            {
+                // Ratkin's EndPlay clears actor before postfixes execute.
+                __state = __instance == null ? null
+                    : AccessTools.Field(__instance.GetType(), "actor")?.GetValue(__instance) as Pawn;
+            }
+
             [HarmonyPostfix]
-            public static void EndPlay_Postfix(RAComponent __instance)
+            public static void EndPlay_Postfix(Pawn __state)
             {
                 Data.ifRatkinEnd = true;
-                VoidAwakeningUtility.DisruptTheLink(Data.HeroPawn);
-                return;
+                Pawn hero = Data.HeroPawn;
+                if (hero == null || hero.Destroyed) hero = __state;
+                if (CoreUtilities.FinalizeDisruption(hero))
+                {
+                    Data.ifDisruptTheLink = true;
+                    if (hero != null && !hero.Destroyed) Data.HeroPawn = hero;
+                }
             }
         }
-        
-
     }
 }

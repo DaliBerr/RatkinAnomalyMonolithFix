@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>RatkinAnomalyMonolithFix</name>
   <author>Aquin</author>
@@ -14,18 +15,22 @@
       <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
     </li>
     <li>
-      <packageID>fxz.ratkinanomaly.update</packageID>
+      <packageId>fxz.ratkinanomaly.update</packageId>
       <displayName>Ratkin Anomaly</displayName>
-      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/3293914637</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>Ludeon.RimWorld.Anomaly</packageId>
+      <displayName>Anomaly</displayName>
     </li>
   </modDependencies>
   <loadAfter>
     <li>brrainz.harmony</li>
     <li>fxz.ratkinanomaly.update</li>
-    
   </loadAfter>
   <supportedVersions>
     <li>1.5</li>
     <li>1.6</li>
+    <li>1.7</li>
   </supportedVersions>
 </ModMetaData>
